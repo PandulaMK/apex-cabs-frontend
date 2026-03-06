@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import VehicleCard from "../components/VehicleCard";
 import api from "../services/api";
 import { createBooking } from "../services/booking.service";
+import ModernLoader from "../components/ModernLoader";
 
 export default function Vehicles() {
   const [vehicles, setVehicles] = useState([]);

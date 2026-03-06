@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import  api  from "../services/api";
-import ModernLoader from "../../components/ModernLoader";
+import ModernLoader from "../components/ModernLoader";
 
 export default function Login() {
   const navigate = useNavigate();

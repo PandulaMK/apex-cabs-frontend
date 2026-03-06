@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BookingCard from "../components/BookingCard";
+import ModernLoader from "../components/ModernLoader";
 import {
   getMyProfile,
   getMyBookings,
