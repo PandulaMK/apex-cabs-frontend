@@ -134,7 +134,7 @@ export default function Vehicles() {
     alert("✅ Advance payment (frontend mock)");
   };
 
-  if (loading) return <div style={{ padding: 18, fontWeight: 800 }}>Loading...</div>;
+  if (loading) return <ModernLoader/>;
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>

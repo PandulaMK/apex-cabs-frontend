@@ -98,7 +98,7 @@ export default function Profile() {
     nav("/payment", { state: { booking } });
   };
 
-  if (loading) return <div style={{ padding: 18, fontWeight: 800 }}>Loading...</div>;
+  if (loading) return <ModernLoader/>;
   if (!profile) return <div style={{ padding: 18 }}>No profile data</div>;
 
   return (

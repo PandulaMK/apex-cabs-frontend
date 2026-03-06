@@ -1,7 +1,9 @@
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import "./admin.css";
 
 export default function AdminLayout() {
+  const navigate = useNavigate();
+
   return (
     <div className="admin-container">
       <aside className="sidebar">
@@ -19,9 +21,9 @@ export default function AdminLayout() {
           className="logout-btn"
           onClick={() => {
             localStorage.removeItem("token");
-localStorage.removeItem("user");
-localStorage.removeItem("role");
-navigate("/login", { replace: true });
+            localStorage.removeItem("user");
+            localStorage.removeItem("role");
+            navigate("/login", { replace: true });
           }}
         >
           Logout

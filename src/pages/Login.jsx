@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import  api  from "../services/api";
+import ModernLoader from "../../components/ModernLoader";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ export default function Login() {
 
   const onSubmit = async (e) => {
   e.preventDefault();
-  if (loading) return;
+  if (loading) return <ModernLoader/>;
 
   try {
     setLoading(true);

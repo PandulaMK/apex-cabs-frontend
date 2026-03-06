@@ -1,7 +1,7 @@
 import { Outlet, NavLink } from "react-router-dom";
 import "./admin.css";     // keep same admin layout structure
 import "./owner.css";     // override only colors
-
+const navigate = useNavigate();
 export default function OwnerLayout() {
   const user = JSON.parse(localStorage.getItem("user") || "null");
 
