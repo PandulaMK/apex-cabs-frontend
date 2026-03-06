@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import  api  from "../services/api";
-import ModernLoader from "../components/ModernLoader";
+import LoginLoader from "../components/LoginLoader";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ export default function Login() {
 
   const onSubmit = async (e) => {
   e.preventDefault();
-  if (loading) return <ModernLoader/>;
+  if (loading) return <LoginLoader/>;
 
   try {
     setLoading(true);
