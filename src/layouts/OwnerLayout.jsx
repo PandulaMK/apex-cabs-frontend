@@ -20,8 +20,9 @@ export default function OwnerLayout() {
           className="logout-btn"
           onClick={() => {
             localStorage.removeItem("token");
-            localStorage.removeItem("user");
-            navigate("/login");
+localStorage.removeItem("user");
+localStorage.removeItem("role");
+navigate("/login", { replace: true });
           }}
         >
           Logout

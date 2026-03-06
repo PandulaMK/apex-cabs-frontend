@@ -12,9 +12,9 @@ export default function Navbar() {
 
   const logout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setOpen(false);
-    navigate("/");
+localStorage.removeItem("user");
+localStorage.removeItem("role");
+navigate("/login", { replace: true });
   };
 
   const go = (path) => {
