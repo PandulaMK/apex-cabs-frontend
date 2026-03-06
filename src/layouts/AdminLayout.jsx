@@ -20,7 +20,7 @@ export default function AdminLayout() {
           onClick={() => {
             localStorage.removeItem("token");
             localStorage.removeItem("user");
-            window.location.href = "/login";
+            navigate("/login");
           }}
         >
           Logout
