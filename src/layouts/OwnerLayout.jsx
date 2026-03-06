@@ -1,9 +1,10 @@
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import "./admin.css";     // keep same admin layout structure
 import "./owner.css";     // override only colors
-const navigate = useNavigate();
+
 export default function OwnerLayout() {
   const user = JSON.parse(localStorage.getItem("user") || "null");
+  const navigate = useNavigate();
 
   return (
     <div className="admin-container owner-theme">
