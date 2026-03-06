@@ -36,11 +36,11 @@ export default function BookingCard({ booking, onCancel, onPayAdvance }) {
   const rawImg =
     v.imageUrl || booking.imageUrl || v.image_path || booking.image_path || "";
   const imgSrc =
-    rawImg && rawImg.startsWith("http")
-      ? rawImg
-      : rawImg
-        ? `http://localhost:5000/${rawImg}`
-        : placeholderSvg;
+  rawImg && rawImg.startsWith("http")
+    ? rawImg
+    : rawImg
+    ? `${import.meta.env.VITE_API_URL}${rawImg}`
+    : placeholderSvg;
 
   const isCancelled = status === "cancelled";
   const isPaid = booking.advance_paid === 1 || booking.advance_paid === true; // supports future db field

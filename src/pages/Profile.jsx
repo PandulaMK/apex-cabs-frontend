@@ -292,16 +292,16 @@ export default function Profile() {
       setSaving(true);
 
       const res = await fetch(
-        `http://localhost:5000/api/bookings/${bookingId}/odometer`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: JSON.stringify({ mileage, note }),
-        }
-      );
+  `${import.meta.env.VITE_API_URL}/api/bookings/${bookingId}/odometer`,
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    body: JSON.stringify({ mileage, note }),
+  }
+);
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Failed");

@@ -37,7 +37,7 @@ export default function Vehicles() {
 
   // ✅ IMPORTANT: this builds a correct file base (removes /api if your baseURL is .../api)
   const fileBase = useMemo(() => {
-    const base = api.defaults?.baseURL || "http://localhost:5000/api";
+    const base = api.defaults?.baseURL || `${import.meta.env.VITE_API_URL}/api`;
     return base.replace(/\/api\/?$/, "");
   }, []);
 

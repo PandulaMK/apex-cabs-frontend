@@ -11,7 +11,7 @@ export default function VehicleCard({ vehicle, selected, onSelect }) {
   const imgSrc = vehicle.image_path
     ? vehicle.image_path.startsWith("http")
       ? vehicle.image_path
-      : `http://localhost:5000${vehicle.image_path}`
+      : `${import.meta.env.VITE_API_URL}${vehicle.image_path}`
     : "/no-car.png";
 
   const cardStyle = {
