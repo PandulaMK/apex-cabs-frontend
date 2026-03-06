@@ -1,0 +1,75 @@
+/* OWNER THEME (same structure as admin.css, only colors changed) */
+
+:root {
+  --owner-dark: #1b1206;
+  --owner-mid: #7a4f07;
+  --owner-gold: #c58a14;
+  --owner-accent: #ffd166; /* active link yellow */
+  --owner-white: rgba(255, 255, 255, 0.92);
+}
+
+/* keep same grid as admin */
+.admin-container.owner-theme {
+  background: #f5f6f8;
+}
+
+/* sidebar gradient like your mockup */
+.admin-container.owner-theme .sidebar {
+  background: linear-gradient(
+    180deg,
+    var(--owner-dark) 0%,
+    var(--owner-mid) 55%,
+    var(--owner-gold) 100%
+  );
+}
+
+/* sidebar title */
+.admin-container.owner-theme .sidebar h2 {
+  color: #ffffff;
+}
+
+/* links */
+.admin-container.owner-theme .sidebar a {
+  color: var(--owner-white);
+  font-weight: 800;
+}
+
+/* active link (yellow) */
+.admin-container.owner-theme .sidebar a.active {
+  color: var(--owner-accent);
+}
+
+/* logout button matches sidebar */
+.admin-container.owner-theme .logout-btn {
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.admin-container.owner-theme .logout-btn:hover {
+  background: rgba(255, 255, 255, 0.20);
+}
+
+/* Optional: small "pill" feel for hover */
+.admin-container.owner-theme .sidebar a:hover {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+/* Owner page heading same as admin */
+.admin-container.owner-theme .admin-content h1,
+.admin-container.owner-theme .admin-content h2 {
+  color: #111827;
+}
+
+/* owner pagination button style */
+.admin-container.owner-theme .pagination button {
+  background: #b7791f;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-weight: 800;
+}
+
+.admin-container.owner-theme .pagination button.active {
+  background: #8a5a12;
+}

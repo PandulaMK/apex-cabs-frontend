@@ -1,0 +1,177 @@
+/* App.css - global layout + responsive helpers */
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Generic container */
+.container {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  padding: 16px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 24px;
+  }
+}
+
+/* ---- Navbar ---- */
+.navbar {
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.navbar-inner {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .navbar-inner {
+    padding: 14px 24px;
+  }
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 900;
+  font-size: 20px;
+  color: #2563eb;
+}
+
+.nav-logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 44px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.nav-links {
+  display: none; /* hidden on mobile */
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-links a {
+  font-weight: 800;
+  color: #1f2937;
+}
+
+.nav-links .loginBtn {
+  font-weight: 900;
+  color: #2563eb;
+}
+
+.nav-links .signupBtn {
+  background: #2563eb;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 900;
+}
+
+.nav-links .logoutBtn {
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+@media (min-width: 900px) {
+  .nav-toggle {
+    display: none; /* desktop hides burger */
+  }
+  .nav-links {
+    display: flex; /* desktop shows links */
+  }
+}
+
+/* Mobile dropdown menu */
+.nav-mobile {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  padding: 0 16px 14px;
+  display: grid;
+  gap: 10px;
+}
+
+.nav-mobile a,
+.nav-mobile button {
+  width: 100%;
+  text-align: left;
+  font-weight: 900;
+  border-radius: 10px;
+  padding: 12px 12px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.nav-mobile .signupBtn {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+}
+
+.nav-mobile .logoutBtn {
+  background: #ef4444;
+  color: #fff;
+  border: none;
+}
+
+@media (min-width: 900px) {
+  .nav-mobile {
+    display: none;
+  }
+}
+
+/* ---- Home hero grid ---- */
+.heroInner {
+  background: #2563eb;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: 1fr; /* ✅ mobile 1 column */
+  gap: 18px;
+  align-items: center;
+  border-radius: 16px;
+}
+
+@media (min-width: 900px) {
+  .heroInner {
+    padding: 26px;
+    gap: 26px;
+    grid-template-columns: 1.2fr 0.8fr; /* ✅ desktop 2 columns */
+  }
+}
+
+/* ---- Auth cards ---- */
+.authCard {
+  width: 100%;
+  max-width: 460px;
+}
+

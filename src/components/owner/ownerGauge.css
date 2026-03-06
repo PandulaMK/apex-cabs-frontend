@@ -1,0 +1,55 @@
+.og-card{
+  width: 240px;
+  padding: 18px 18px 16px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(15,23,42,0.08);
+  box-shadow: 0 16px 40px rgba(15,23,42,0.06);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap: 12px;
+}
+
+.og-gauge{
+  width: 180px;
+  height: 90px;
+  border-radius: 180px 180px 0 0;
+  position: relative;
+  overflow: hidden;
+
+  /* gold track + red fill like your design */
+  background: conic-gradient(
+    #ff2d2d 0% var(--pct),
+    #f5d76a var(--pct) 100%
+  );
+}
+
+.og-hole{
+  position:absolute;
+  left: 14px;
+  right: 14px;
+  bottom: -68px;
+  height: 160px;
+  background: #fff;
+  border-radius: 999px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow: inset 0 0 0 1px rgba(15,23,42,0.06);
+}
+
+.og-value{
+  font-size: 30px;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.og-title{
+  font-size: 13px;
+  font-weight: 900;
+  color: #0f172a;
+  opacity: 0.85;
+  text-align: center;
+  line-height: 1.2;
+}

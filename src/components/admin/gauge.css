@@ -1,0 +1,43 @@
+.gaugeCard {
+  width: 220px;
+  text-align: center;
+}
+
+.gaugeWrap {
+  position: relative;
+  width: 170px;
+  height: 90px; /* shows only top half */
+  margin: 0 auto 8px;
+  overflow: hidden;
+}
+
+.gauge {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+}
+
+.gaugeCut {
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  width: 125px;
+  height: 125px;
+  transform: translate(-50%, -50%);
+  background: #f5f6f8; /* match admin background */
+  border-radius: 50%;
+}
+
+.gaugeLabel {
+  font-size: 12px;
+  font-weight: 900;
+  color: #111827;
+  margin-top: 6px;
+}
+
+.gaugeNumber {
+  margin-top: 6px;
+  font-size: 26px;
+  font-weight: 900;
+  color: #111827;
+}
