@@ -130,10 +130,18 @@ export default function Vehicles() {
   };
 
   const payAdvance = () => {
-    if (!token) return requireLogin();
-    if (!selectedVehicle) return alert("Select a vehicle first");
-    alert("✅ Advance payment (frontend mock)");
-  };
+  if (!token) return requireLogin();
+  if (!selectedVehicle?.vehicle_id) return alert("Select a vehicle first");
+  if (!validateBookingDates()) return;
+
+  navigate("/payment", {
+    state: {
+      vehicle: selectedVehicle,
+      rental_date: rentalDate,
+      return_date: returnDate,
+    },
+  });
+};
 
   if (loading) return <ModernLoader/>;
 

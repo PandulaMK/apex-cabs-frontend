@@ -1,53 +1,99 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { api } from "../services/api";
+import api from "../services/api";
 
 export default function PaymentGateway() {
   const nav = useNavigate();
-  const { state } = useLocation(); // contains booking
-  const booking = state?.booking;
+  const { state } = useLocation();
+
+  const booking = state?.booking || null;
+  const vehicle = state?.vehicle || null;
+  const rental_date = state?.rental_date || "";
+  const return_date = state?.return_date || "";
 
   const [method, setMethod] = useState("card");
   const [loading, setLoading] = useState(false);
 
-  if (!booking) {
-    return (
-      <div style={{ padding: 24 }}>
-        <h2>No booking selected</h2>
-        <button onClick={() => nav("/profile")}>Back</button>
-      </div>
-    );
-  }
+  // Support both flows:
+  // 1. From profile => booking exists
+  // 2. From vehicles => vehicle exists, booking may not exist yet
+  const title = booking?.title || booking?.vehicle?.title || vehicle?.title || "Selected Vehicle";
 
-  // Example: 20% advance of 1 day rate (dummy)
-  const daily = Number(booking.daily_rate ?? booking.pricePerDay ?? 0) || 0;
+  const daily =
+    Number(
+      booking?.daily_rate ??
+      booking?.pricePerDay ??
+      vehicle?.price_per_day ??
+      vehicle?.daily_rate ??
+      vehicle?.pricePerDay ??
+      0
+    ) || 0;
+
   const advanceAmount = Math.round(daily * 0.2);
 
   const payNow = async () => {
-    setLoading(true);
     try {
-      // DUMMY payment success -> mark paid in backend (dummy endpoint)
-      await api.post(`/payments/advance`, {
-        booking_id: booking.booking_id,
+      setLoading(true);
+
+      let finalBookingId = booking?.booking_id;
+
+      // If user came from Vehicles page and booking doesn't exist yet,
+      // create booking first before recording advance payment
+      if (!finalBookingId) {
+        if (!vehicle?.vehicle_id || !rental_date || !return_date) {
+          alert("Missing booking details");
+          return;
+        }
+
+        const { data: createdBooking } = await api.post("/bookings", {
+          vehicle_id: vehicle.vehicle_id,
+          rental_date,
+          return_date,
+        });
+
+        finalBookingId =
+          createdBooking?.booking_id ||
+          createdBooking?.data?.booking_id ||
+          createdBooking?.booking?.booking_id;
+
+        if (!finalBookingId) {
+          throw new Error("Booking created, but booking_id was not returned");
+        }
+      }
+
+      // Record / update advance payment in backend
+      await api.post("/payments/advance", {
+        booking_id: finalBookingId,
         amount: advanceAmount,
         method,
+        payment_status: "paid",
       });
 
-      alert("✅ Payment Successful (Dummy)");
+      alert("✅ Advance payment successful");
       nav("/profile");
     } catch (e) {
-      console.error(e);
-      alert("❌ Payment failed");
+      console.error("Advance payment failed:", e);
+      alert(e?.response?.data?.message || e?.message || "❌ Payment failed");
     } finally {
       setLoading(false);
     }
   };
 
+  if (!booking && !vehicle) {
+    return (
+      <div style={{ padding: 24 }}>
+        <h2>No booking selected</h2>
+        <button onClick={() => nav("/vehicles")}>Back</button>
+      </div>
+    );
+  }
+
   return (
     <div style={{ padding: 24, maxWidth: 520, margin: "0 auto" }}>
-      <h2 style={{ fontWeight: 900 }}>Dummy Payment Gateway</h2>
+      <h2 style={{ fontWeight: 900 }}>Payment Gateway</h2>
       <p style={{ color: "#64748B", fontWeight: 700 }}>
-        Booking #{booking.booking_id} • {booking.title || booking.vehicle?.title}
+        {booking?.booking_id ? `Booking #${booking.booking_id} • ` : ""}
+        {title}
       </p>
 
       <div style={box}>
@@ -55,6 +101,12 @@ export default function PaymentGateway() {
           <span>Advance amount</span>
           <b>Rs. {advanceAmount.toLocaleString()}</b>
         </div>
+
+        {rental_date && return_date && (
+          <div style={{ marginTop: 10, color: "#475569", fontWeight: 700 }}>
+            {rental_date} → {return_date}
+          </div>
+        )}
 
         <div style={{ marginTop: 14 }}>
           <div style={{ fontWeight: 800, marginBottom: 8 }}>Payment Method</div>
@@ -66,7 +118,7 @@ export default function PaymentGateway() {
               checked={method === "card"}
               onChange={() => setMethod("card")}
             />
-            Card (dummy)
+            Card
           </label>
 
           <label style={radio}>
@@ -76,7 +128,7 @@ export default function PaymentGateway() {
               checked={method === "bank"}
               onChange={() => setMethod("bank")}
             />
-            Bank Transfer (dummy)
+            Bank Transfer
           </label>
 
           <label style={radio}>
@@ -86,7 +138,7 @@ export default function PaymentGateway() {
               checked={method === "cash"}
               onChange={() => setMethod("cash")}
             />
-            Cash (dummy)
+            Cash
           </label>
         </div>
 
@@ -110,7 +162,7 @@ export default function PaymentGateway() {
         </button>
 
         <button
-          onClick={() => nav("/profile")}
+          onClick={() => nav(-1)}
           style={{
             marginTop: 10,
             width: "100%",

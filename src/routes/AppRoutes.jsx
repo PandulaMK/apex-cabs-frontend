@@ -25,6 +25,7 @@ import OwnerVehicles from "../pages/owner/OwnerVehicles";
 import OwnerBookings from "../pages/owner/Bookings";
 import OwnerPayments from "../pages/owner/Payments";
 import OwnerMaintenance from "../pages/owner/Maintenance";
+import PaymentGateway from "../pages/PaymentGateway";
 
 export default function AppRoutes() {
   return (
@@ -37,6 +38,7 @@ export default function AppRoutes() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/payment" element={<PaymentGateway />} />
 
         {/* ✅ Customer-only pages */}
         <Route element={<RoleGuard allow={["customer"]} />}>
